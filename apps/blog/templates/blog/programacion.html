@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+Programación
+{% endblock title %}
+
+{% block image %}
+  {% load static %}
+  {% static 'image/programacion.jpg' %}
+{% endblock image %}
+
+{% block herotitle %}
+Programación
+{% endblock herotitle %}
+
+{% block content %}
+  {% include 'blog/includes/posts.html' with posts=posts %}
+{% endblock content %}

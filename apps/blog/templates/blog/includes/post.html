@@ -1,0 +1,28 @@
+ <div class="card article">
+  <div class="card-content">
+    <div class="media">
+      {% if post.autor.imagen %}
+      <div class="media-center">
+        <img 
+          src="{{ MEDIA_URL }}{{ post.autor.imagen }}" class="author-image"
+          alt="{{ post.autor }}">
+      </div>
+      {% endif%}
+      <div class="media-content has-text-centered">
+        <p class="title article-title">{{ post.titulo }}</p>
+        <div class="tags has-addons level-item">
+          <span class="tag is-rounded is-info">{{ post.autor.nombres }} {{ post.autor.apellidos }}</span>
+          <span class="tag is-rounded">{{ post.fecha_creacion }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="content article-body">
+      {% if detalle %}
+        {{ post.contenido|safe }}
+      {% else %}
+        {{ post.descripcion }}
+        <a class href="{% url 'blog:detalle_post' post.slug %}">Leer mas</a>
+      {% endif %}
+    </div>
+  </div>
+</div>

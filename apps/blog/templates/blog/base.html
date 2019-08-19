@@ -1,0 +1,147 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static 'css/bulma.0.7.5.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/bulma-utilities.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+  <title>
+  {% block title %}
+  Django Blog
+  {% endblock title %}
+  </title>
+</head>
+<body>
+
+  <!-- START NAV -->
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="{% url 'blog:home' %}">
+          <h4 class="title is-4">Django Blog</h4>
+        </a>
+        <span class="navbar-burger burger" data-target="navbarMenu">
+        <span></span>
+        <span></span>
+        <span></span>
+        </span>
+      </div>
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a class="navbar-item is-tab is-active" href="{% url 'blog:home' %}">
+            Inicio
+          </a>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              Categorias
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item" href="{% url 'blog:generales' %}">
+                Generales
+              </a>
+              <a class="navbar-item" href="{% url 'blog:tecnologia' %}">
+                Tecnológia
+              </a>
+              <a class="navbar-item"  href="{% url 'blog:video_juegos' %}">
+                Video Juegos
+              </a>
+              <a class="navbar-item"  href="{% url 'blog:programacion' %}">
+                Programación
+              </a>
+            </div>
+          </div>
+          <a class="navbar-item is-tab"  href="{% url 'blog:tutoriales' %}">
+            Tutoriales
+          </a>
+          <a class="navbar-item is-tab">
+            Features
+          </a>
+          <a class="navbar-item is-tab">
+            Team
+          </a>
+          <a class="navbar-item is-tab">
+            Archives
+          </a>
+          <a class="navbar-item is-tab">
+            Help
+          </a>
+          
+          {% if user.is_authenticated %}
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">
+              Account
+            </a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item">
+                Dashboard
+              </a>
+              <a class="navbar-item">
+                Profile
+              </a>
+              <a class="navbar-item">
+                Settings
+              </a>
+              <hr class="navbar-divider">
+              <div class="navbar-item">
+                Logout
+              </div>
+            </div>
+          </div>
+          {% else %}
+          <span class="navbar-item">
+            <a class="button">
+              Login
+            </a>
+            &nbsp;
+            <a class="button is-info">
+              Registrarse
+            </a>
+          </span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- END NAV -->
+
+  <!-- HERO IMAGE-->
+  {% block hero %}
+  <div class="hero is-fullheight has-background">
+    <img 
+      class="hero-background is-transparent"
+      src="{% block image %}{% endblock image %}"
+    />
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title has-text-white is-2">
+          {% block herotitle %}{% endblock herotitle %}
+        </h1>
+        <h3 class="subtitle has-text-white is-3">
+          {% block herosubtitle %}{% endblock herosubtitle %}
+        </h3>
+      </div>
+    </div>
+  </div>
+  {% endblock hero %}
+  <!-- HERO IMAGE -->
+
+  <!-- START CONTAINER -->
+  <div class="container">
+    {% block content %}
+    {% endblock content %}
+  </div>
+  <!-- END CONTAINER -->
+
+  <!-- START FOOTER -->
+  {% block footer %}
+  {% endblock footer %}
+  <!-- END FOOTER -->
+
+  <script src="{% static 'js/font-awesome.5.3.1.js' %}"></script>
+  
+</body>
+</html>

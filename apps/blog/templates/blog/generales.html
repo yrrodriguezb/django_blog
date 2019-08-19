@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+Generales
+{% endblock title %}
+
+{% block image %}
+  {% load static %}
+  {% static 'image/generales.jpg' %}
+{% endblock image %}
+
+{% block herotitle %}
+Generales
+{% endblock herotitle %}
+
+{% block content %}
+{% include 'blog/includes/posts.html' with posts=posts %}
+{% endblock content %}

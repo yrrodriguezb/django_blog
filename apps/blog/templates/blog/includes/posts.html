@@ -1,0 +1,17 @@
+{% if posts %}
+<section class="articles">
+  <div class="column is-8 is-offset-2">
+    {% for post in posts %}
+      {% include 'blog/includes/post.html' with post=post %}
+    {% endfor %}
+  </div>
+</section>
+{% else %}
+<div class="has-padding-3 has-margin-t-3 has-background-white">
+  <article class="message is-link">
+    <div class="message-body">
+    No se encontraron Posts registrados. <a class="tag is-link" href="{% url 'blog:home' %}"><strong>Nuevo Post</strong></a>
+    </div>
+  </article>
+</div>
+{% endif %}

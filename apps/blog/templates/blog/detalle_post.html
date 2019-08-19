@@ -1,0 +1,15 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+{{ post.nombre }}
+{% endblock title %}
+
+{% block hero %}
+{% endblock hero %}
+
+{% block content %}
+
+<div class="column is-8 is-offset-2">
+  {% include 'blog/includes/post.html' with post=post detalle=True %}
+</div>
+{% endblock content %}

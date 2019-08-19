@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+Video Juegos
+{% endblock title %}
+
+{% block image %}
+  {% load static %}
+  {% static 'image/videojuegos.jpg' %}
+{% endblock image %}
+
+{% block herotitle %}
+Video Juegos
+{% endblock herotitle %}
+
+{% block content %}
+  {% include 'blog/includes/posts.html' with posts=posts %}
+{% endblock content %}

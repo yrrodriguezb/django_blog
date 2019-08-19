@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+Tecnología
+{% endblock title %}
+
+{% block image %}
+  {% load static %}
+  {% static 'image/tecnologia.jpg' %}
+{% endblock image %}
+
+
+{% block herotitle %}
+Tecnología
+{% endblock herotitle %}
+
+{% block content %}
+  {% include 'blog/includes/posts.html' with posts=posts %}
+{% endblock content %}
