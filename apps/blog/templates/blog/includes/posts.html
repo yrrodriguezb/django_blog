@@ -15,3 +15,7 @@
   </article>
 </div>
 {% endif %}
+
+{% if is_paginated %}
+  {% include 'blog/includes/paginator.html' with paginator=page_obj %}
+{% endif %}

@@ -8,8 +8,9 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 
 class AutorAdmin(admin.ModelAdmin):
+    list_display_links = ('id', )
     search_fields = ('nombre',)
-    list_display = ('nombres', 'apellidos', 'email', 'estado',)
+    list_display = ('id', 'nombres', 'apellidos', 'email', 'estado',)
 
 class PostAdmin(admin.ModelAdmin):
     readonly_fields = ('slug', )

@@ -2,23 +2,23 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import (
-    home, 
-    generales, 
-    programacion, 
-    tecnologia, 
-    tutoriales, 
-    video_juegos,
-    detalle_post
+    PostsListView,
+    GeneralesListView,
+    ProgramacionListView, 
+    TutorialesListView,
+    TecnologiaListView, 
+    VideoJuegosListView,
+    PostDetailView
 )
 
 urlpatterns = [
-    path('', home, name='home'),
-    path('generales/', generales, name='generales'),
-    path('programacion/', programacion, name='programacion'),
-    path('tecnologia/', tecnologia, name='tecnologia'),
-    path('tutoriales/', tutoriales, name='tutoriales'),
-    path('video-juegos/', video_juegos, name='video_juegos'),
-    path('post/<slug:slug>/', detalle_post, name='detalle_post'),
+    path('', PostsListView.as_view(), name='home'),
+    path('generales/', GeneralesListView.as_view(), name='generales'),
+    path('programacion/', ProgramacionListView.as_view(), name='programacion'),
+    path('tecnologia/', TecnologiaListView.as_view(), name='tecnologia'),
+    path('tutoriales/', TutorialesListView.as_view(), name='tutoriales'),
+    path('video-juegos/', VideoJuegosListView.as_view(), name='video_juegos'),
+    path('post/<slug:slug>/', PostDetailView.as_view(), name='detalle_post'),
 ]
 
 if settings.DEBUG:

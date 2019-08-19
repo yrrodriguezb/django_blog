@@ -18,99 +18,12 @@
 <body>
 
   <!-- START NAV -->
-  <nav class="navbar">
-    <div class="container">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="{% url 'blog:home' %}">
-          <h4 class="title is-4">Django Blog</h4>
-        </a>
-        <span class="navbar-burger burger" data-target="navbarMenu">
-        <span></span>
-        <span></span>
-        <span></span>
-        </span>
-      </div>
-      <div id="navbarMenu" class="navbar-menu">
-        <div class="navbar-end">
-          <a class="navbar-item is-tab is-active" href="{% url 'blog:home' %}">
-            Inicio
-          </a>
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              Categorias
-            </a>
-            <div class="navbar-dropdown">
-              <a class="navbar-item" href="{% url 'blog:generales' %}">
-                Generales
-              </a>
-              <a class="navbar-item" href="{% url 'blog:tecnologia' %}">
-                Tecnológia
-              </a>
-              <a class="navbar-item"  href="{% url 'blog:video_juegos' %}">
-                Video Juegos
-              </a>
-              <a class="navbar-item"  href="{% url 'blog:programacion' %}">
-                Programación
-              </a>
-            </div>
-          </div>
-          <a class="navbar-item is-tab"  href="{% url 'blog:tutoriales' %}">
-            Tutoriales
-          </a>
-          <a class="navbar-item is-tab">
-            Features
-          </a>
-          <a class="navbar-item is-tab">
-            Team
-          </a>
-          <a class="navbar-item is-tab">
-            Archives
-          </a>
-          <a class="navbar-item is-tab">
-            Help
-          </a>
-          
-          {% if user.is_authenticated %}
-          <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">
-              Account
-            </a>
-            <div class="navbar-dropdown">
-              <a class="navbar-item">
-                Dashboard
-              </a>
-              <a class="navbar-item">
-                Profile
-              </a>
-              <a class="navbar-item">
-                Settings
-              </a>
-              <hr class="navbar-divider">
-              <div class="navbar-item">
-                Logout
-              </div>
-            </div>
-          </div>
-          {% else %}
-          <span class="navbar-item">
-            <a class="button">
-              Login
-            </a>
-            &nbsp;
-            <a class="button is-info">
-              Registrarse
-            </a>
-          </span>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </nav>
+  {% include 'blog/includes/nav.html' %}
   <!-- END NAV -->
 
   <!-- HERO IMAGE-->
   {% block hero %}
-  <div class="hero is-fullheight has-background">
+  <div class="hero is-fullheight has-background animated fadeIn faster" style="margin-top:45.5px">
     <img 
       class="hero-background is-transparent"
       src="{% block image %}{% endblock image %}"
@@ -130,7 +43,7 @@
   <!-- HERO IMAGE -->
 
   <!-- START CONTAINER -->
-  <div class="container">
+  <div class="container animated fadeIn faster">
     {% block content %}
     {% endblock content %}
   </div>
@@ -142,6 +55,7 @@
   <!-- END FOOTER -->
 
   <script src="{% static 'js/font-awesome.5.3.1.js' %}"></script>
+  <script src="{% static 'js/blog.js' %}"></script>
   
 </body>
 </html>

@@ -9,6 +9,18 @@ Inicio
   {% static 'image/general.jpg' %}
 {% endblock image %}
 
+{% block herotitle %}
+<p class="has-text-black animated bounceInDown">
+  Nuestras Publicaciones
+</p>
+{% endblock herotitle %}
+
+{% block herosubtitle %}
+<p class="has-text-black animated bounceInDown">
+  Conoce sobre todo lo que desees en nuestro portal web
+</p>
+{% endblock herosubtitle %}
+
 {% block content %}
   {% include 'blog/includes/posts.html' with posts=posts %}
 {% endblock content %}

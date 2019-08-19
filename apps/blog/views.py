@@ -1,64 +1,66 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
 from .models import Post, Categoria
 
-def home(request):
-    posts = Post.objects.filter(estado=True)
-    context = {
-      'posts': posts
-    }
-    return render(request, 'blog/index.html', context)
 
-def generales(request):
-    posts = Post.objects.filter(
-      estado=True,
-      categoria__nombre=Categoria.objects.get(nombre='General')
-    )
-    context = {
-      'posts': posts
-    }
-    return render(request, 'blog/generales.html', context)
+class PostBaseListView(ListView):
+    model = Post
+    context_object_name = 'posts'
+    paginate_by = 5
 
-def programacion(request):
-    posts = Post.objects.filter(
-      estado=True,
-      categoria__nombre=Categoria.objects.get(nombre='Programación')
-    )
-    context = {
-      'posts': posts
-    }
-    return render(request, 'blog/programacion.html', context)
+    def get_queryset(self):
+        return Post.objects.filter(estado=True)
 
-def tutoriales(request):
-    posts = Post.objects.filter(
-      estado=True,
-      categoria__nombre=Categoria.objects.get(nombre='Tutoriales')
-    )
-    context = {
-      'posts': posts
-    }
-    return render(request, 'blog/tutoriales.html', context)
+    def get_posts_by_category(self, category_name):
+        categoria = self.__get_category_by_name(category_name)
+        posts = Post.objects.filter(estado=True, categoria=categoria).order_by('categoria')
+        return posts
 
-def tecnologia(request):
-    posts = Post.objects.filter(
-      estado=True,
-      categoria__nombre=Categoria.objects.get(nombre='Tecnología')
-    )
-    context = {
-      'posts': posts
-    }
-    return render(request, 'blog/tecnologia.html', context)
+    def __get_category_by_name(self, name):
+        return get_object_or_404(Categoria, nombre=name)
 
-def video_juegos(request):
-    posts = Post.objects.filter(
-      estado=True,
-      categoria__nombre=Categoria.objects.get(nombre='Video Juegos')
-    )
-    context = {
-      'posts': posts
-    }
-    return render(request, 'blog/video_juegos.html', context)
 
-def detalle_post(request, slug):
-    post = get_object_or_404(Post, slug=slug)
-    context = { 'post': post }
-    return render(request, 'blog/detalle_post.html', context)
+class PostsListView(PostBaseListView):
+    template_name = 'blog/index.html'
+      
+
+class GeneralesListView(PostBaseListView):
+    template_name = 'blog/generales.html'
+
+    def get_queryset(self):
+        return self.get_posts_by_category('General')
+    
+
+class ProgramacionListView(PostBaseListView):
+    template_name = 'blog/programacion.html'
+
+    def get_queryset(self):
+        return self.get_posts_by_category('Programación')
+
+
+class TutorialesListView(PostBaseListView):
+    template_name = 'blog/tutoriales.html'
+
+    def get_queryset(self):
+        return self.get_posts_by_category('Tutoriales')
+
+
+class TecnologiaListView(PostBaseListView):
+    template_name = 'blog/tecnologia.html'
+
+    def get_queryset(self):
+        return self.get_posts_by_category('Tecnología')
+
+
+class VideoJuegosListView(PostBaseListView):
+    template_name = 'blog/video_juegos.html'
+
+    def get_queryset(self):
+        return self.get_posts_by_category('Video Juegos')
+
+
+class PostDetailView(DetailView):
+    model = Post
+    context_object_name = 'post'
+    template_name = 'blog/detalle_post.html'

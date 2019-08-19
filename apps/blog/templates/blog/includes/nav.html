@@ -1,0 +1,99 @@
+{% url 'blog:home' as HOME_URL %}
+{% url 'blog:generales' as GENERALES_URL %}
+{% url 'blog:tecnologia' as TECNOLOGIA_URL %}
+{% url 'blog:video_juegos' as VIDEO_JUEGOS_URL %}
+{% url 'blog:programacion' as PROGRAMACION_URL %}
+{% url 'blog:tutoriales' as TUTORIALES_URL %}
+
+{% with CURRENT_URL=request.get_full_path %}
+<nav class="navbar has-shodow is-fixed-top">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="{% url 'blog:home' %}">
+        <h4 class="title is-4">Django Blog</h4>
+      </a>
+      <span id="navbarBurger" class="navbar-burger burger" data-target="navbarMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+      </span>
+    </div>
+    <div id="navbarMenu" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item is-tab {% if HOME_URL == CURRENT_URL %}is-active{% endif %}" href="{{ HOME_URL }}">
+          Inicio
+        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Categorias
+          </a>
+          <div class="navbar-dropdown animated fadeIn faster">
+            <a class="navbar-item {% if GENERALES_URL == CURRENT_URL %}is-active{% endif %}" href="{{ GENERALES_URL }}">
+              Generales
+            </a>
+            <a class="navbar-item {% if TECNOLOGIA_URL == CURRENT_URL %}is-active{% endif %}" href="{{ TECNOLOGIA_URL }}">
+              Tecnológia
+            </a>
+            <a class="navbar-item {% if VIDEO_JUEGOS_URL == CURRENT_URL %}is-active{% endif %}" href="{{ VIDEO_JUEGOS_URL }}">
+              Video Juegos
+            </a>
+            <a class="navbar-item {% if PROGRAMACION_URL == CURRENT_URL %}is-active{% endif %}"  href="{{ PROGRAMACION_URL }}">
+              Programación
+            </a>
+          </div>
+        </div>
+        <a class="navbar-item is-tab {% if TUTORIALES_URL == CURRENT_URL %}is-active{% endif %}"  href="{{ TUTORIALES_URL }}">
+          Tutoriales
+        </a>
+        <a class="navbar-item is-tab">
+          Features
+        </a>
+        <a class="navbar-item is-tab">
+          Team
+        </a>
+        <a class="navbar-item is-tab">
+          Archives
+        </a>
+        <a class="navbar-item is-tab">
+          Help
+        </a>
+        
+        {% if user.is_authenticated %}
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            {{ user.username }}
+          </a>
+          <div class="navbar-dropdown animated fadeIn faster">
+            {% if user.is_staff %}
+            <a class="navbar-item" href="{% url 'admin:index' %}">
+              Dashboard
+            </a>
+            {% endif %}
+            <a class="navbar-item">
+              Perfil
+            </a>
+            <a class="navbar-item">
+              Configuración
+            </a>
+            <hr class="navbar-divider">
+            <div class="navbar-item">
+              Logout
+            </div>
+          </div>
+        </div>
+        {% else %}
+        <span class="navbar-item">
+          <a class="button">
+            Login
+          </a>
+          &nbsp;
+          <a class="button is-info">
+            Registrarse
+          </a>
+        </span>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</nav>
+{% endwith %}
