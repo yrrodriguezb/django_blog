@@ -8,7 +8,7 @@
           alt="{{ post.autor }}">
       </div>
       {% endif%}
-      <div class="media-content has-text-centered">
+      <div class="media-content has-overflow-unset has-text-centered">
         <p class="title article-title">{{ post.titulo }}</p>
         <div class="tags has-addons level-item">
           <span class="tag is-rounded is-info">{{ post.autor.nombres }} {{ post.autor.apellidos }}</span>
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <div class="content article-body">
+    <div class="content {% if detalle %}has-text-justified{% else %}has-text-centered{% endif %}">
       {% if detalle %}
         {{ post.contenido|safe }}
       {% else %}

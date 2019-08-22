@@ -1,0 +1,45 @@
+<div class="field">
+  <label class="label">Usuario</label>
+  <div class="control">
+    <input name="username" class="input" type="text" placeholder="Usuario" required autofocus="">
+  </div>
+  {% if form.username.errors %}
+    {% for error in form.username.errors %}
+    <p class="help is-danger">
+      {{ error }}
+    </p>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<div class="field">
+  <label class="label">Contraseña</label>
+  <div class="control">
+    <input name="password" class="input" type="password" placeholder="Contraseña" required>
+  </div>
+  {% if form.password.errors %}
+    {% for error in form.password.errors %}
+    <p class="help is-danger">
+      {{ error }}
+    </p>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<div class="field">
+  <label class="checkbox">
+    <input type="checkbox">
+    Recordarme
+  </label>
+</div>
+
+<hr>
+
+<div class="field is-grouped">
+  <p class="control">
+      <button class="button is-block is-info">Login</button>
+  </p>
+  <p class="control">
+      <a class="button" href="{% url 'blog:home' %}">Cancelar</a>
+  </p>
+</div>

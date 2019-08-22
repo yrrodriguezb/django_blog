@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<section class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column is-4 is-offset-4">
+          <h1 class="title has-text-centered">
+            Registrar una cuenta
+          </h1>
+          
+          <div class="box">
+            <form method="POST">
+                {% csrf_token %}
+              {% include 'core/includes/forms/register.html' %}
+            </form>
+          </div>
+
+          <p class="has-text-centered">
+            <a href="{% url 'core:login' %}">Login</a> &nbsp;·&nbsp;
+            <a href="#">Need help?</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock content %}

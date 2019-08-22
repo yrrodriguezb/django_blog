@@ -1,3 +1,6 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
 {% url 'blog:home' as HOME_URL %}
 {% url 'blog:generales' as GENERALES_URL %}
 {% url 'blog:tecnologia' as TECNOLOGIA_URL %}
@@ -76,18 +79,18 @@
               Configuración
             </a>
             <hr class="navbar-divider">
-            <div class="navbar-item">
+            <a class="navbar-item" href="{% url 'core:logout' %}">
               Logout
-            </div>
+            </a>
           </div>
         </div>
         {% else %}
         <span class="navbar-item">
-          <a class="button">
+          <a class="button" href="{% url 'core:login' %}">
             Login
           </a>
           &nbsp;
-          <a class="button is-info">
+          <a class="button is-info" href="{% url 'core:signup' %}">
             Registrarse
           </a>
         </span>
@@ -97,3 +100,4 @@
   </div>
 </nav>
 {% endwith %}
+{% endblock content %}

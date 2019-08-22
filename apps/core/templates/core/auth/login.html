@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+ <section class="hero is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="column is-4 is-offset-4">
+        <h3 class="title has-text-grey has-text-centered">Login</h3>
+        <p class="subtitle has-text-grey has-text-centered">Por favor iniciar sesión para continuar</p>
+        <div class="box">
+          <p class="subtitle has-text-grey has-text-centered">Ingresar a Django Blog.</p>
+          <form method="POST">
+            {% csrf_token %}
+            {% include 'core/includes/forms/login.html' %}
+          </form>
+        </div>
+
+        <p class="has-text-grey has-text-centered">
+            <a href="{% url 'core:signup' %}">Registrarse</a> &nbsp;·&nbsp;
+            <a href="#">Olvide mi contraseña</a> &nbsp;·&nbsp;
+            <a href="#">Necesitas Ayuda?</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

@@ -55,6 +55,10 @@ body {
     margin-top: 3rem;
 }
 
+.media-content.has-overflow-unset {
+    overflow: unset !important
+}
+
 .article,
 .promo-block {
     margin-top: 6rem;
