@@ -1,0 +1,21 @@
+<div class="is-full-width">
+  <form method="GET">
+    <div class="field has-addons has-addons-right">
+      <p class="control is-expanded">
+        <input 
+          class="input" 
+          type="text" 
+          name="q" 
+          placeholder="Buscar"
+          value="{{ request.GET.q|default_if_none:'' }}">
+      </p>
+      <p class="control is-small">
+        <button type="submit" class="button is-info">
+          <span class="icon">
+            <i class="fas fa-search"></i>
+          </span>
+        </button>
+      </p>
+    </div>
+  </form>
+</div>

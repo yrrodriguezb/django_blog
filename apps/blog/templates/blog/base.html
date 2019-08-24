@@ -28,7 +28,17 @@
       class="hero-background is-transparent"
       src="{% block image %}{% endblock image %}"
     />
-    <div class="hero-body">
+    <div class="hero-head">
+      <div class="container has-text-centered">
+        <div class="columns has-margin-t-1 has-margin-lr-3">
+          <div class="column is-8 is-offset-2">
+            {% include 'blog/includes/search.html' %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-body">   
       <div class="container">
         <h1 class="title has-text-white is-2">
           {% block herotitle %}{% endblock herotitle %}

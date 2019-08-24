@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
@@ -8,14 +9,28 @@ class PostBaseListView(ListView):
     model = Post
     context_object_name = 'posts'
     paginate_by = 5
+    
 
     def get_queryset(self):
+        search = self.request.GET.get('q', None)
+        if search:
+            return Post.objects.filter(
+                (Q(titulo__icontains=search) | Q(descripcion__icontains=search))
+                & Q(estado=True)
+            )
         return Post.objects.filter(estado=True)
 
     def get_posts_by_category(self, category_name):
+        search = self.request.GET.get('q', None)
         categoria = self.__get_category_by_name(category_name)
-        posts = Post.objects.filter(estado=True, categoria=categoria).order_by('categoria')
-        return posts
+
+        if search:
+            return Post.objects.filter(
+                (Q(titulo__icontains=search) | Q(descripcion__icontains=search))
+                & Q(estado=True) & Q(categoria=categoria)
+            )
+
+        return Post.objects.filter(estado=True, categoria=categoria).order_by('categoria')
 
     def __get_category_by_name(self, name):
         return get_object_or_404(Categoria, nombre=name)
