@@ -1,0 +1,72 @@
+<div class="field">
+  <label class="label">Titulo</label>
+  <div class="control">
+    <input name="titulo" class="input" type="text" placeholder="Titulo" required autofocus="" value="{{ form.titulo.value|default_if_none:'' }}">
+  </div>
+  {% if form.titulo.errors %}
+    {% for error in form.titulo.errors %}
+    <p class="help is-danger">
+      {{ error }}
+    </p>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<div class="field">
+  <label class="label">Descripción</label>
+  <div class="control">
+    <input name="descripcion" class="input" type="text" placeholder="Titulo" required autofocus="" value="{{ form.descripcion.value|default_if_none:'' }}">
+  </div>
+  {% if form.descripcion.errors %}
+    {% for error in form.descripcion.errors %}
+    <p class="help is-danger">
+      {{ error }}
+    </p>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<div class="field">
+  <label class="label">Contenido</label>
+  <div class="control">
+    {{ form.contenido }} 
+  </div>
+  {% if form.contenido.errors %}
+    {% for error in form.contenido.errors %}
+    <p class="help is-danger">
+      {{ error }}
+    </p>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<div class="field">
+  <label class="label">Categoria</label>
+  <div class="control">
+    <div class="select is-fullwidth">
+      <select name="categoria">
+        {% for value, text in form.fields.categoria.choices %}
+          <option value="{{ value }}" {% if value == form.categoria.value %}selected{% endif %}>{{ text }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  {% if form.categoria.errors %}
+    {% for error in form.categoria.errors %}
+    <p class="help is-danger">
+      {{ error }}
+    </p>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<hr>
+
+<div class="field is-grouped">
+  <p class="control">
+      <button type="submit" class="button is-block is-info">Guardar</button>
+  </p>
+  <p class="control">
+      <a class="button" href="{% url 'blog:home' %}">Cancelar</a>
+  </p>
+</div>

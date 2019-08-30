@@ -1,0 +1,38 @@
+{% extends  'blog/base.html' %}
+{% load static %}
+
+{% block extrajs %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+{% endblock extrajs %}
+
+{% block title %}
+Editar {{ post }}
+{% endblock title %}
+
+{% block hero %}
+{% endblock hero %}
+
+{% block content %}
+  <div class="columns has-margin-t-1">
+    <div class="column is-8 is-offset-2 has-background-white has-padding-1">
+
+      <h1 class="title">Editar Publicación</h1>
+      <h2 class="subtitle">{{ post.titulo }}</h2>
+
+      {% if 'ok' in request.GET and request.GET.ok %}
+      <article class="message is-info">
+        <div class="message-body">
+          <strong>Info: </strong> Los datos se guardaron correctamente.
+        </div>
+      </article>
+      {% endif %}
+
+      <form method="POST">
+        {% csrf_token %}
+        {% include 'blog/includes/forms/post_edit.html' %}
+      </form>
+    
+    </div>
+  </div>
+{% endblock content %}

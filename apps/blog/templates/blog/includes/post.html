@@ -19,6 +19,15 @@
     <div class="content {% if detalle %}has-text-justified{% else %}has-text-centered{% endif %}">
       {% if detalle %}
         {{ post.contenido|safe }}
+
+        <hr>
+
+        <a href="{% url 'blog:editar_post' post.pk %}">
+          <span class="icon has-text-warning">
+            <i class="fas fa-edit"></i>
+          </span>
+        </a>
+
       {% else %}
         {{ post.descripcion }}
         <a class href="{% url 'blog:detalle_post' post.slug %}">Leer mas</a>

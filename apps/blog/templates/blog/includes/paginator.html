@@ -1,20 +1,20 @@
 {% with request.GET.page|default:"1" as CURRENT_PAGE %}
 <nav class="pagination has-padding-b-1" role="navigation" aria-label="pagination">
   {% if paginator.has_previous %}
-    <a href="?page=1" class="pagination-previous  button">&laquo; Primera Página</a>
-    <a href="?page={{ paginator.previous_page_number }}" class="pagination-previous button">Anterior</a>
+    <a href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-previous button">&laquo; Primera Página</a>
+    <a href="?page={{ paginator.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-previous button">Anterior</a>
   {% endif %}
 
   {% if paginator.has_next %}
-    <a href="?page={{ paginator.next_page_number }}" class="pagination-next button">Siguiente</a>
-    <a href="?page={{ paginator.paginator.num_pages }}" class="pagination-next button">Última Página &raquo;</a>
+    <a href="?page={{ paginator.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-next button">Siguiente</a>
+    <a href="?page={{ paginator.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="pagination-next button">Última Página &raquo;</a>
   {% endif %}
 
   <ul class="pagination-list">
     {% for page in paginator.paginator.page_range %}
       <li>
         <a 
-          href="?page={{ page }}" 
+          href="?page={{ page }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" 
           class="pagination-link button {% if CURRENT_PAGE == page|stringformat:"i" %}is-current{% endif %}" 
           {% if CURRENT_PAGE == page|stringformat:"i" %}aria-current="page"{% endif %}
           aria-label="Goto page {{ page }}">

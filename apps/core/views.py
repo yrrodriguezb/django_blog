@@ -20,8 +20,8 @@ from .forms import CreateUserForm
 class LoginView(FormView):
     form_class = AuthenticationForm
     template_name = "core/auth/login.html"
-    success_url =  reverse_lazy("blog:home")
-
+    success_url = reverse_lazy("blog:home")
+    
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return HttpResponseRedirect(self.get_success_url())
@@ -31,6 +31,14 @@ class LoginView(FormView):
     def form_valid(self, form):
         login(self.request, form.get_user())
         return super(LoginView, self).form_valid(form)
+
+    def get_success_url(self):
+        url = self.request.GET.get('next', None)
+
+        if not url:
+            url = super(LoginView, self).get_success_url()
+        
+        return url
 
 
 class LogoutView(RedirectView):

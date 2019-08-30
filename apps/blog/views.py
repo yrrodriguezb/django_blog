@@ -1,8 +1,12 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
+from django.views.generic.edit import UpdateView
+from django.urls import reverse_lazy
 from .models import Post, Categoria
+from .forms import EditPostForm
 
 
 class PostBaseListView(ListView):
@@ -79,3 +83,14 @@ class PostDetailView(DetailView):
     model = Post
     context_object_name = 'post'
     template_name = 'blog/detalle_post.html'
+
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'core:login'
+    model = Post
+    context_object_name = 'post'
+    form_class = EditPostForm
+    template_name = 'blog/editar_post.html'
+
+    def get_success_url(self):
+        return reverse_lazy('blog:editar_post', kwargs={ 'pk': self.object.id }) + "?ok=true"

@@ -7,7 +7,7 @@
           type="text" 
           name="q" 
           placeholder="Buscar"
-          value="{{ request.GET.q|default_if_none:'' }}">
+          value="{% if request.GET.q %}{{ request.GET.q|default_if_none:'' }}{% endif %}">
       </p>
       <p class="control is-small">
         <button type="submit" class="button is-info">
