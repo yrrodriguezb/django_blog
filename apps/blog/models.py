@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 
@@ -81,3 +82,19 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.titulo)
         super(Post, self).save(*args, **kwargs)
+
+
+class PQR(models.Model):
+    nombres = models.CharField(max_length=150, verbose_name='Nombres')
+    apellidos = models.CharField(max_length=150, verbose_name='Apellidos')
+    email = models.EmailField(max_length=150, verbose_name='Correo Electrónico')
+    asunto = models.CharField(max_length=100, verbose_name='Asunto')
+    mensaje = models.TextField(max_length=1000, verbose_name='Mensaje')
+    fecha_creacion = models.DateField(auto_now=True, verbose_name='Fecha de Creacíon')
+
+    class Meta:
+        verbose_name = 'Peticiones, Quejas y/o Reclamos'
+        verbose_name_plural = 'Peticiones, Quejas y/o Reclamos'
+
+    def __str__(self):
+      return "%s <%s>" % (self.asunto, self.email)

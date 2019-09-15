@@ -1,12 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, CreateView
 from django.urls import reverse_lazy
 from .models import Post, Categoria
-from .forms import EditPostForm
+from .forms import EditPostForm, PQRForm
 
 
 class PostBaseListView(ListView):
@@ -94,3 +95,26 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('blog:editar_post', kwargs={ 'pk': self.object.id }) + "?ok=true"
+
+
+class PQRView(CreateView):
+    form_class = PQRForm
+    template_name = 'blog/contact.html'
+    success_url = reverse_lazy('blog:PQR')
+
+    def get_success_url(self):
+        return reverse_lazy('blog:PQR') + "?ok=true"
+
+    def form_valid(self, form):
+        self.enviar_email(form)
+        return super(PQRView, self).form_valid(form)
+
+    def enviar_email(self, form):
+        subject = form.cleaned_data['asunto']
+        from_email = form.cleaned_data['email']
+        message = form.cleaned_data['mensaje']
+
+        try:
+            send_mail(subject, message, from_email, ['django.yrrodriguezbgmail.com'])
+        except:
+            pass

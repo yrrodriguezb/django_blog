@@ -3,13 +3,13 @@ var openNav = (function () {
     this.classList.remove("is-active");
     page.controls.navbarMenu.classList.remove("is-active");
     page.controls.navbarMenu.classList.remove("animated");
-    page.controls.navbarMenu.classList.remove("bounceInDown");
+    page.controls.navbarMenu.classList.remove("fadeIn");
   }
   else {
     this.classList.add("is-active");
     page.controls.navbarMenu.classList.add("is-active");
     page.controls.navbarMenu.classList.add("animated");
-    page.controls.navbarMenu.classList.add("bounceInDown");
+    page.controls.navbarMenu.classList.add("fadeIn");
   }
 });
 

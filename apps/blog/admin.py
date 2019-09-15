@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Autor, Categoria, Post
+from .models import Autor, Categoria, Post, PQR
 
 
 class CategoriaAdmin(admin.ModelAdmin):
@@ -11,6 +11,19 @@ class AutorAdmin(admin.ModelAdmin):
     list_display_links = ('id', )
     search_fields = ('nombre',)
     list_display = ('id', 'nombres', 'apellidos', 'email', 'estado',)
+
+
+class PQRAdmin(admin.ModelAdmin):
+    list_display = ('email', 'asunto', 'fecha_creacion')
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+    
+    def has_add_permission(self, request, obj=None):
+        return False
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -38,3 +51,4 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(Autor, AutorAdmin)
 admin.site.register(Categoria, CategoriaAdmin)
 admin.site.register(Post, PostAdmin)
+admin.site.register(PQR, PQRAdmin)

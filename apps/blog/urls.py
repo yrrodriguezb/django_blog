@@ -8,7 +8,8 @@ from .views import (
     TecnologiaListView, 
     VideoJuegosListView,
     PostDetailView,
-    PostUpdateView
+    PostUpdateView,
+    PQRView
 )
 
 urlpatterns = [
@@ -20,6 +21,7 @@ urlpatterns = [
     path('video-juegos/', VideoJuegosListView.as_view(), name='video_juegos'),
     path('post/<slug:slug>/', PostDetailView.as_view(), name='detalle_post'),
     path('post/<int:pk>/editar', PostUpdateView.as_view(), name='editar_post'),
+    path('contactanos', PQRView.as_view(), name='PQR'),
 ]
 
 

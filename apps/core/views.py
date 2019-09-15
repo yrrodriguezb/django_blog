@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import login, logout
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import (
     PasswordChangeView, 
     PasswordResetView, 
@@ -14,11 +14,11 @@ from django.urls import reverse_lazy
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect, render
 from django.views.generic import FormView, RedirectView, CreateView
-from .forms import CreateUserForm
+from .forms import CreateUserForm, AuthenticationUserForm
 
 
 class LoginView(FormView):
-    form_class = AuthenticationForm
+    form_class = AuthenticationUserForm
     template_name = "core/auth/login.html"
     success_url = reverse_lazy("blog:home")
     
@@ -29,7 +29,12 @@ class LoginView(FormView):
             return super(LoginView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
+        remember_me = form.cleaned_data.get('remember_me')
         login(self.request, form.get_user())
+        
+        if not remember_me:
+            self.request.session.set_expiry(0)
+
         return super(LoginView, self).form_valid(form)
 
     def get_success_url(self):
@@ -37,7 +42,6 @@ class LoginView(FormView):
 
         if not url:
             url = super(LoginView, self).get_success_url()
-        
         return url
 
 

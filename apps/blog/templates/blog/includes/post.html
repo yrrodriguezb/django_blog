@@ -20,13 +20,15 @@
       {% if detalle %}
         {{ post.contenido|safe }}
 
-        <hr>
+        {% if perms.blog.change_post %}
+          <hr>
 
-        <a href="{% url 'blog:editar_post' post.pk %}">
-          <span class="icon has-text-warning">
-            <i class="fas fa-edit"></i>
-          </span>
-        </a>
+          <a href="{% url 'blog:editar_post' post.pk %}">
+            <span class="icon has-text-warning">
+              <i class="fas fa-edit"></i>
+            </span>
+          </a>
+        {% endif %}
 
       {% else %}
         {{ post.descripcion }}

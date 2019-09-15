@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User 
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+
 
 ERROR_MESSAGE_USER = { 
     'required': 'El usuario es requerido.',
@@ -14,7 +15,11 @@ ERROR_MESSAGE_PASSWORD = {
 
 ERROR_MESSAGE_EMAIL = {
     'invalid': 'Ingrese un correo valido.'
-}
+}  
+
+
+class AuthenticationUserForm(AuthenticationForm):
+    remember_me = forms.BooleanField(required=False)
 
 
 class CreateUserForm(UserCreationForm):
