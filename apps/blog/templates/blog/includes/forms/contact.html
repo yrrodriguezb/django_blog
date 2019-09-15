@@ -1,0 +1,85 @@
+<div class="field is-horizontal">
+  <div class="field-body">
+    <div class="field">
+      <label class="label">Nombres</label>
+      <div class="control">
+        <input name="nombres" class="input" type="text" placeholder="Nombres" required autofocus="" value="{{ form.nombres.value|default_if_none:'' }}">
+      </div>
+      {% if form.nombres.errors %}
+        {% for error in form.nombres.errors %}
+        <p class="help is-danger">
+          {{ error }}
+        </p>
+        {% endfor %}
+      {% endif %}
+    </div>
+    
+    <div class="field">
+      <label class="label">Apellidos</label>
+      <div class="control">
+        <input name="apellidos" class="input" type="text" placeholder="Apellidos" required value="{{ form.apellidos.value|default_if_none:'' }}">
+      </div>
+      {% if form.apellidos.errors %}
+        {% for error in form.apellidos.errors %}
+        <p class="help is-danger">
+          {{ error }}
+        </p>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<div class="field">
+  <label class="label">Correo Electronico</label>
+  <div class="control">
+    <input name="email" class="input" type="text" placeholder="Correo Electronico" required value="{{ form.email.value|default_if_none:'' }}">
+  </div>
+  {% if form.email.errors %}
+    {% for error in form.email.errors %}
+    <p class="help is-danger">
+      {{ error }}
+    </p>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<div class="field">
+  <label class="label">Asunto</label>
+  <div class="control">
+    <input name="asunto" class="input" type="text" placeholder="Asunto" required value="{{ form.asunto.value|default_if_none:'' }}">
+  </div>
+  {% if form.asunto.errors %}
+    {% for error in form.asunto.errors %}
+    <p class="help is-danger">
+      {{ error }}
+    </p>
+    {% endfor %}
+  {% endif %}
+</div>
+
+
+<div class="field">
+  <label class="label">Mensaje</label>
+  <div class="control">
+    <textarea name="mensaje" class="textarea" placeholder="Maximo 1000 caracteres" >{{ form.mensaje.value|default_if_none:"" }}</textarea>
+  </div>
+  {% if form.mensaje.errors %}
+    {% for error in form.mensaje.errors %}
+    <p class="help is-danger">
+      {{ error }}
+    </p>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<hr>
+
+<div class="field is-grouped">
+  <p class="control">
+    <button type="submit" class="button is-block is-info">Guardar</button>
+  </p>
+  <p class="control">
+    <a class="button" href="{% url 'blog:home' %}">Cancelar</a>
+  </p>
+</div>
